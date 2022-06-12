@@ -1,57 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import MainLayout from "./components/MainLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./redux/store";
+import { getContract, getWeb3 } from "./redux/slice/blockchainSlice";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import {
+  getContractModel,
+  LPFarmName20,
+  LPFarmName30,
+  LPFarmName50,
+  RewardTokenName,
+} from "./model/blockchain/blockchainModel";
 
 function App() {
+  // #region Redux
+  var dispatch = useAppDispatch();
+  const state = useAppSelector((state: RootState) => state.blockchain);
+  // #endregion
+
+  const init = () => {
+    dispatch(getWeb3());
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  useEffect(() => {
+    if (state.web3 !== undefined) {
+      handleGetContract(RewardTokenName);
+      handleGetContract(LPFarmName50);
+      handleGetContract(LPFarmName30);
+      handleGetContract(LPFarmName20);
+    }
+  }, [state.web3]);
+
+  const handleGetContract = (contractName: string) => {
+    dispatch(
+      getContract({
+        web3: state.web3!,
+        contractName: contractName,
+      } as getContractModel)
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <MainLayout />
+    </>
   );
 }
 
