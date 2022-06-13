@@ -1,19 +1,55 @@
 import React from "react";
-import { web3Contract } from "../model/blockchain/blockchainModel";
+import { LPFarmModel } from "../model/blockchain/blockchainModel";
 
 interface LPFarmProps {
-  name: string;
-  LP: number;
-  contract: web3Contract;
+  handleCheckPoint: () => void;
+  handleClaimReward: () => void;
+  handleWithdraw: () => void;
+  LPFarm: LPFarmModel;
+  isParticipant: boolean;
 }
 
-const LPFarm: React.FC<LPFarmProps> = ({ name = "", LP = 0, contract }) => {
+const LPFarm: React.FC<LPFarmProps> = ({
+  LPFarm,
+  handleCheckPoint,
+  handleClaimReward,
+  handleWithdraw,
+  isParticipant,
+}) => {
   return (
-    <div className="w-full">
-      <p>Amount</p>
-      <p>Your reward</p>
-      <p></p>
-      <p></p>
+    <div className="w-full mt-2">
+      <div className="grid grid-cols-2">
+        <div className="grid auto-rows-auto flex justify-items-end">
+          <p>Reward Proportion: </p>
+          <p>Amount deposited: </p>
+          <p>Your claimed reward: </p>
+          <p>Expected yield: </p>
+          <p>Start block number: </p>
+        </div>
+        <div className="grid auto-rows-auto flex justify-center">
+          <p>{LPFarm.rewardProportion}</p>
+          <p>{LPFarm.deposits}</p>
+          <p>{LPFarm.claimedRewards}</p>
+          <p>{LPFarm.expectedYield}</p>
+          <p>{LPFarm.startBlockNumber}</p>
+        </div>
+      </div>
+      <div className="flex place-content-around mt-2">
+        <button
+          disabled={!isParticipant || LPFarm.expectedYield === 0}
+          onClick={() => handleClaimReward()}
+          className="p-2"
+        >
+          claim reward
+        </button>
+        <button
+          disabled={!isParticipant}
+          onClick={() => handleWithdraw()}
+          className="p-2"
+        >
+          Withdraw participation
+        </button>
+      </div>
     </div>
   );
 };

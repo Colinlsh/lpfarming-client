@@ -31,9 +31,9 @@
       "constant": true
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"lpParameters\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"rewardProportion\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/LPDeployer.sol\":\"LPDeployer\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/interfaces/IERC20.sol\":{\"keccak256\":\"0x6ebf1944ab804b8660eb6fc52f9fe84588cee01c2566a69023e59497e7d27f45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2900536cdadec954ced8789a9d1ed4b5e640029e1424e91fd5b88026486f4d45\",\"dweb:/ipfs/QmUMUX7CuYoiHvFkhifqtXGaciw2wnm4t9sAoPzETZ3Gbq\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34\",\"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr\"]},\"project:/contracts/LPDeployer.sol\":{\"keccak256\":\"0x8438abb9d4a8de922dc5ab0d569b0f2d452346b2a114290485920d025316acec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26971fd95181cfbab43df724bdc3b97e4720d8831e1cc78d8d331b23bf12901e\",\"dweb:/ipfs/QmUKoSYJPjt5ejHf9FqHYw6SReHHsNUBgH8SutmwPJUqoX\"]},\"project:/contracts/LPFarm.sol\":{\"keccak256\":\"0x0938720922d01f696fdfb63cb0e033cefdd11297ae30213fb7b6735ae564bbc7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://27427f9f762fa6cfd975bea550afb43086e498d4488a38ed3fb36b6daae72be7\",\"dweb:/ipfs/QmWZpAAMJ2PLrophE3M7vhYdmd6xgX3NL1oAJTv5R1476o\"]},\"project:/contracts/interfaces/IERC20LP.sol\":{\"keccak256\":\"0x9ae0f9766d8123db8132cec19498eab6acb733b10af6b2ddd1cd81f004b1879d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://79db914ce96342d76403c18878b59f09c0e028799cbc28277bc3f25c01aca3ac\",\"dweb:/ipfs/QmU3b3vpKci1Rp7rv17NovbxYtH57jPnip3Rhp3ZnWN7Mu\"]},\"project:/contracts/interfaces/IlpDeployer.sol\":{\"keccak256\":\"0xa8bdfc56cb618799dc3108e2034aeda1631db3f7d0dc5f7a87762511a102bf65\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7b8fbfdf1884411203c45e27ce97c56c4273e0aba9f2be3df4428b9b4b16ef8c\",\"dweb:/ipfs/QmdozitGMPE4rRahZa7tqiGGbNpLko9FaPDMiFXGjMFDEq\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506101a4806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063c9f8350314610030575b600080fd5b610038610051565b6040516100489493929190610129565b60405180910390f35b60008060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060030154905084565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006100fa826100cf565b9050919050565b61010a816100ef565b82525050565b6000819050919050565b61012381610110565b82525050565b600060808201905061013e6000830187610101565b61014b6020830186610101565b6101586040830185610101565b610165606083018461011a565b9594505050505056fea2646970667358221220a8d197b81ff6e315d5d22dea6ca2b02752528ebe8191c2695daf3bf806c801f364736f6c634300080d0033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063c9f8350314610030575b600080fd5b610038610051565b6040516100489493929190610129565b60405180910390f35b60008060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060030154905084565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006100fa826100cf565b9050919050565b61010a816100ef565b82525050565b6000819050919050565b61012381610110565b82525050565b600060808201905061013e6000830187610101565b61014b6020830186610101565b6101586040830185610101565b610165606083018461011a565b9594505050505056fea2646970667358221220a8d197b81ff6e315d5d22dea6ca2b02752528ebe8191c2695daf3bf806c801f364736f6c634300080d0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"lpParameters\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"rewardProportion\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/LPDeployer.sol\":\"LPDeployer\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/interfaces/IERC20.sol\":{\"keccak256\":\"0x6ebf1944ab804b8660eb6fc52f9fe84588cee01c2566a69023e59497e7d27f45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2900536cdadec954ced8789a9d1ed4b5e640029e1424e91fd5b88026486f4d45\",\"dweb:/ipfs/QmUMUX7CuYoiHvFkhifqtXGaciw2wnm4t9sAoPzETZ3Gbq\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34\",\"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr\"]},\"project:/contracts/LPDeployer.sol\":{\"keccak256\":\"0x8438abb9d4a8de922dc5ab0d569b0f2d452346b2a114290485920d025316acec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26971fd95181cfbab43df724bdc3b97e4720d8831e1cc78d8d331b23bf12901e\",\"dweb:/ipfs/QmUKoSYJPjt5ejHf9FqHYw6SReHHsNUBgH8SutmwPJUqoX\"]},\"project:/contracts/LPFarm.sol\":{\"keccak256\":\"0x42103fbc9e476c197fa5c2149e2bbc793a1c5e493e163a7f6500560b6e7f7d45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d79269457ee6331368e2487bef90de3bf9ec0ece7876efdbc3382931e5a7ee57\",\"dweb:/ipfs/QmPoeTfBR3roKZKUQXLoe6jUsbowYgzEEMtUE4w2nGP3e8\"]},\"project:/contracts/interfaces/IERC20LP.sol\":{\"keccak256\":\"0x9ae0f9766d8123db8132cec19498eab6acb733b10af6b2ddd1cd81f004b1879d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://79db914ce96342d76403c18878b59f09c0e028799cbc28277bc3f25c01aca3ac\",\"dweb:/ipfs/QmU3b3vpKci1Rp7rv17NovbxYtH57jPnip3Rhp3ZnWN7Mu\"]},\"project:/contracts/interfaces/IlpDeployer.sol\":{\"keccak256\":\"0xa8bdfc56cb618799dc3108e2034aeda1631db3f7d0dc5f7a87762511a102bf65\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7b8fbfdf1884411203c45e27ce97c56c4273e0aba9f2be3df4428b9b4b16ef8c\",\"dweb:/ipfs/QmdozitGMPE4rRahZa7tqiGGbNpLko9FaPDMiFXGjMFDEq\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506101a4806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063c9f8350314610030575b600080fd5b610038610051565b6040516100489493929190610129565b60405180910390f35b60008060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060030154905084565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006100fa826100cf565b9050919050565b61010a816100ef565b82525050565b6000819050919050565b61012381610110565b82525050565b600060808201905061013e6000830187610101565b61014b6020830186610101565b6101586040830185610101565b610165606083018461011a565b9594505050505056fea26469706673582212203e5f1155493cf4bb70897d4a8b1bf1563b58af1355765a014c3d33bba5f1aa1f64736f6c634300080d0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063c9f8350314610030575b600080fd5b610038610051565b6040516100489493929190610129565b60405180910390f35b60008060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060030154905084565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006100fa826100cf565b9050919050565b61010a816100ef565b82525050565b6000819050919050565b61012381610110565b82525050565b600060808201905061013e6000830187610101565b61014b6020830186610101565b6101586040830185610101565b610165606083018461011a565b9594505050505056fea26469706673582212203e5f1155493cf4bb70897d4a8b1bf1563b58af1355765a014c3d33bba5f1aa1f64736f6c634300080d0033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [
@@ -598,16 +598,16 @@
         666
       ],
       "IERC20LP": [
-        1176
+        1195
       ],
       "IlpDeployer": [
-        1190
+        1209
       ],
       "LPDeployer": [
         779
       ],
       "LPFarm": [
-        1163
+        1182
       ]
     },
     "id": 780,
@@ -632,7 +632,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 780,
-        "sourceUnit": 1191,
+        "sourceUnit": 1210,
         "src": "61:38:5",
         "symbolAliases": [],
         "unitAlias": ""
@@ -644,7 +644,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 780,
-        "sourceUnit": 1164,
+        "sourceUnit": 1183,
         "src": "101:22:5",
         "symbolAliases": [],
         "unitAlias": ""
@@ -657,7 +657,7 @@
               "id": 718,
               "name": "IlpDeployer",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1190,
+              "referencedDeclaration": 1209,
               "src": "150:11:5"
             },
             "id": 719,
@@ -672,7 +672,7 @@
         "id": 779,
         "linearizedBaseContracts": [
           779,
-          1190
+          1209
         ],
         "name": "LPDeployer",
         "nameLocation": "136:10:5",
@@ -803,7 +803,7 @@
           },
           {
             "baseFunctions": [
-              1189
+              1208
             ],
             "constant": false,
             "functionSelector": "c9f83503",
@@ -1020,7 +1020,7 @@
                               "nodeType": "NewExpression",
                               "src": "763:10:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1163_$",
+                                "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1182_$",
                                 "typeString": "function () returns (contract LPFarm)"
                               },
                               "typeName": {
@@ -1030,13 +1030,13 @@
                                   "id": 757,
                                   "name": "LPFarm",
                                   "nodeType": "IdentifierPath",
-                                  "referencedDeclaration": 1163,
+                                  "referencedDeclaration": 1182,
                                   "src": "767:6:5"
                                 },
-                                "referencedDeclaration": 1163,
+                                "referencedDeclaration": 1182,
                                 "src": "767:6:5",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_LPFarm_$1163",
+                                  "typeIdentifier": "t_contract$_LPFarm_$1182",
                                   "typeString": "contract LPFarm"
                                 }
                               }
@@ -1200,7 +1200,7 @@
                             ],
                             "src": "763:152:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1163_$salt",
+                              "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1182_$salt",
                               "typeString": "function () returns (contract LPFarm)"
                             }
                           },
@@ -1215,7 +1215,7 @@
                           "src": "763:154:5",
                           "tryCall": false,
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_LPFarm_$1163",
+                            "typeIdentifier": "t_contract$_LPFarm_$1182",
                             "typeString": "contract LPFarm"
                           }
                         }
@@ -1223,7 +1223,7 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_LPFarm_$1163",
+                            "typeIdentifier": "t_contract$_LPFarm_$1182",
                             "typeString": "contract LPFarm"
                           }
                         ],
@@ -1487,12 +1487,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xA5c712f0ba7dEf86AE0ea58ecE2bb6591d514e6e",
-      "transactionHash": "0x926e25c5786b3b9f743252c23bbaca189650a0941aad6c421e059676e2edf9a1"
+      "address": "0xB5E863528AE6Fd4306c2D0BBEf0E27A9c75660c9",
+      "transactionHash": "0xb1e977549de65a683b910cd3db5e192bb21c874c7ecd250fb19912ace8958ef5"
     }
   },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-06-11T02:25:14.987Z",
+  "updatedAt": "2022-06-13T09:32:53.338Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

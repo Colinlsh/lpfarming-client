@@ -14,6 +14,8 @@ import {
   LPFarmName50,
   RewardTokenName,
 } from "./model/blockchain/blockchainModel";
+import About from "./components/About";
+import Footer from "./components/Footer";
 
 function App() {
   // #region Redux
@@ -50,6 +52,8 @@ function App() {
     <>
       <Navbar />
       <MainLayout />
+      <About />
+      <Footer />
     </>
   );
 }

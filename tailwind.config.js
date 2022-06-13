@@ -23,6 +23,11 @@ module.exports = {
         linkedinShadeDark: "#004D77",
       },
     },
+    variants: {
+      extend: {
+        opacity: ["disabled"],
+      },
+    },
   },
   plugins: [],
 };

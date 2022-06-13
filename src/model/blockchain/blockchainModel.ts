@@ -5,11 +5,10 @@ export interface web3State {
   currentAccount: string;
   web3: Web3 | undefined;
   RewardToken: web3Contract | undefined;
-  LPFarms: web3Contract[] | undefined;
-  deposits: number;
-  yield: number;
-  expectedYield: number;
+  LPFarms: LPFarmModel[] | undefined;
+  totalClaimedReward: string;
   selectedPool: string;
+  currentBlockNumber: number;
 }
 
 export interface web3Contract {
@@ -22,20 +21,12 @@ export interface web3Contract {
 }
 
 export interface transactionModel {
-  contracts: Contract[];
+  contracts: web3Contract[];
   contractName: string;
   from: string;
   to: string;
-  tokenId: string;
   value: any;
-}
-
-export interface stakeTokenModel {
-  stakecontract: web3Contract;
-  lpcontract: web3Contract;
-  rewardcontract: web3Contract;
-  owner: string;
-  value: any;
+  web3: Web3 | undefined;
 }
 
 export interface getContractModel {
@@ -46,6 +37,15 @@ export interface getContractModel {
 export interface KeyValuePair {
   name: string;
   value: any[];
+}
+
+export interface LPFarmModel extends web3Contract {
+  claimedRewards: number;
+  expectedYield: number;
+  rewardProportion: number;
+  deposits: number;
+  isParticipant: boolean;
+  startBlockNumber: string;
 }
 
 export const RewardTokenName = "RewardToken";

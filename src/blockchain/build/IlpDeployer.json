@@ -44,15 +44,15 @@
     "absolutePath": "project:/contracts/interfaces/IlpDeployer.sol",
     "exportedSymbols": {
       "IlpDeployer": [
-        1190
+        1209
       ]
     },
-    "id": 1191,
+    "id": 1210,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1178,
+        "id": 1197,
         "literals": [
           "solidity",
           ">=",
@@ -69,9 +69,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1190,
+        "id": 1209,
         "linearizedBaseContracts": [
-          1190
+          1209
         ],
         "name": "IlpDeployer",
         "nameLocation": "71:11:9",
@@ -79,7 +79,7 @@
         "nodes": [
           {
             "functionSelector": "c9f83503",
-            "id": 1189,
+            "id": 1208,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -87,23 +87,23 @@
             "nameLocation": "99:12:9",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1179,
+              "id": 1198,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "111:2:9"
             },
             "returnParameters": {
-              "id": 1188,
+              "id": 1207,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1181,
+                  "id": 1200,
                   "mutability": "mutable",
                   "name": "factory",
                   "nameLocation": "186:7:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1189,
+                  "scope": 1208,
                   "src": "178:15:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -112,7 +112,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1180,
+                    "id": 1199,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "178:7:9",
@@ -126,12 +126,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1183,
+                  "id": 1202,
                   "mutability": "mutable",
                   "name": "owner",
                   "nameLocation": "216:5:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1189,
+                  "scope": 1208,
                   "src": "208:13:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -140,7 +140,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1182,
+                    "id": 1201,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "208:7:9",
@@ -154,12 +154,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1185,
+                  "id": 1204,
                   "mutability": "mutable",
                   "name": "token",
                   "nameLocation": "244:5:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1189,
+                  "scope": 1208,
                   "src": "236:13:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -168,7 +168,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1184,
+                    "id": 1203,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "236:7:9",
@@ -182,12 +182,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1187,
+                  "id": 1206,
                   "mutability": "mutable",
                   "name": "rewardProportion",
                   "nameLocation": "272:16:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1189,
+                  "scope": 1208,
                   "src": "264:24:9",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -196,7 +196,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1186,
+                    "id": 1205,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "264:7:9",
@@ -210,14 +210,14 @@
               ],
               "src": "163:136:9"
             },
-            "scope": 1190,
+            "scope": 1209,
             "src": "90:210:9",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1191,
+        "scope": 1210,
         "src": "61:242:9",
         "usedErrors": []
       }
@@ -230,7 +230,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-06-11T02:25:05.968Z",
+  "updatedAt": "2022-06-13T09:32:44.221Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LPFarmName20,
   LPFarmName30,
   LPFarmName50,
-  web3Contract,
 } from "../model/blockchain/blockchainModel";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setSelectedPool } from "../redux/slice/blockchainSlice";
+import {
+  checkpoint,
+  claimRewards,
+  getFarmStats,
+  setSelectedPool,
+  withdraw,
+} from "../redux/slice/blockchainSlice";
 import { RootState } from "../redux/store";
 import LPFarm from "./LPFarm";
 
@@ -15,36 +20,89 @@ const Tabbar = () => {
   const state = useAppSelector((state: RootState) => state.blockchain);
   const dispatch = useAppDispatch();
   // #endregion
-  const [tabState, setTabState] = useState(1);
-  const [contract, setContract] = useState<web3Contract>();
+  const [tabState, setTabState] = useState(0);
+  const [farmAddress, setFarmAddress] = useState("");
 
-  const handleSelectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const num = parseInt(e.target.value);
-    setTabState(num);
-    setSelectedPoolDispatch(num);
+  // const handleSelectOption = (num: string) => {
+  //   setTabState(parseInt(num));
+  //   setSelectedPoolDispatch(parseInt(num));
+  // };
+
+  const handleSelectOptionAddress = (address: string) => {
+    setFarmAddress(address);
+    setSelectedPoolDispatch(address);
   };
 
-  const handleSelectTab = (num: number) => {
-    setTabState(num);
-    setSelectedPoolDispatch(num);
+  const setSelectedPoolDispatch = (address: string) => {
+    const _farm = state.LPFarms?.filter((x) => x.address === address)[0];
+    dispatch(setSelectedPool(_farm?.name));
   };
 
-  const setSelectedPoolDispatch = (num: number) => {
-    switch (num) {
-      case 1:
-        dispatch(setSelectedPool(LPFarmName50));
-        break;
-      case 2:
-        dispatch(setSelectedPool(LPFarmName30));
-
-        break;
-      case 3:
-        dispatch(setSelectedPool(LPFarmName20));
-        break;
-      default:
-        break;
-    }
+  const handleCheckpoint = () => {
+    dispatch(
+      checkpoint({
+        contracts: [state.LPFarms!.filter((x) => x.address === farmAddress)[0]],
+        contractName: state.selectedPool,
+        from: state.currentAccount,
+        to: "",
+        value: 0,
+        web3: state.web3,
+      })
+    );
   };
+
+  const handleClaimReward = () => {
+    dispatch(
+      claimRewards({
+        contracts: [
+          state.LPFarms!.filter((x) => x.address === farmAddress)[0],
+          state.RewardToken!,
+        ],
+        contractName: state.selectedPool,
+        from: state.currentAccount,
+        to: "",
+        value: 0,
+        web3: state.web3,
+      })
+    );
+  };
+
+  const handleWithdraw = () => {
+    dispatch(
+      withdraw({
+        contracts: [
+          state.LPFarms!.filter((x) => x.address === farmAddress)[0],
+          state.RewardToken!,
+        ],
+        contractName: state.selectedPool,
+        from: state.currentAccount,
+        to: "",
+        value: 0,
+        web3: state.web3,
+      })
+    );
+  };
+
+  useEffect(() => {
+    dispatch(
+      getFarmStats({
+        contracts: [
+          state.LPFarms!.filter((x) => x.address === farmAddress)[0]!,
+        ],
+        contractName: state.selectedPool,
+        from: state.currentAccount,
+        to: "",
+        value: 0,
+        web3: state.web3,
+      })
+    );
+  }, [
+    state.totalClaimedReward,
+    farmAddress,
+    state.selectedPool,
+    state.currentAccount,
+    state.LPFarms,
+  ]);
 
   return (
     <div>
@@ -59,147 +117,65 @@ const Tabbar = () => {
         <select
           aria-label="Selected tab"
           className="dark:text-white form-select block w-full p-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent relative z-10"
-          onChange={(e) => handleSelectOption(e)}
-          value={tabState}
+          onChange={(e) => handleSelectOptionAddress(e.target.value)}
+          value={farmAddress}
         >
-          <option
-            value={1}
-            className={
-              tabState === 1
-                ? "text-sm text-gray-600 selected"
-                : "text-sm text-gray-600"
-            }
-          >
-            LP50
-          </option>
-          <option
-            value={2}
-            className={
-              tabState === 2
-                ? "text-sm text-gray-600 selected"
-                : "text-sm text-gray-600"
-            }
-          >
-            LP30
-          </option>
-          <option
-            value={3}
-            className={
-              tabState === 3
-                ? "text-sm text-gray-600 selected"
-                : "text-sm text-gray-600"
-            }
-          >
-            LP20
-          </option>
+          {state.LPFarms!.map((x, index) => (
+            <option
+              key={x.address}
+              className={
+                farmAddress === x.address
+                  ? "text-sm text-gray-600 selected"
+                  : "text-sm text-gray-600"
+              }
+              value={x.address}
+            >
+              {x.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className="xl:w-full xl:mx-0 h-12 hidden sm:block bg-white dark:bg-gray-800 shadow rounded">
-        <div className="h-full md:space-x-28 sm:space-x-14 px-10">
-          <button
-            onClick={() => handleSelectTab(1)}
-            className={
-              tabState === 1
-                ? "h-[50%] bg-gray-600 border-0 hover:bg-gray-600 hover:text-white font-bold"
-                : "h-full bg-transparent border-0 font-bold"
-            }
-          >
-            LP50
-          </button>
-          <button
-            onClick={() => handleSelectTab(2)}
-            className={
-              tabState === 2
-                ? "h-[50%] drop-shadow-2xl bg-gray-600 border-0 hover:bg-gray-600 hover:text-white font-bold"
-                : "h-full bg-transparent border-0 font-bold"
-            }
-          >
-            LP30
-          </button>
-          <button
-            onClick={() => handleSelectTab(3)}
-            className={
-              tabState === 3
-                ? "h-[50%] bg-gray-600 border-0 hover:bg-gray-600 hover:text-white font-bold"
-                : "h-full bg-transparent border-0 font-bold"
-            }
-          >
-            LP20
-          </button>
+        <div className="flex h-full place-content-around px-10">
+          {state.LPFarms!.map((x, index) => (
+            <button
+              key={index}
+              onClick={() => handleSelectOptionAddress(`${x.address}`)}
+              className={
+                farmAddress === x.address
+                  ? "bg-gray-600 border-0 hover:bg-gray-600 hover:text-white font-bold"
+                  : "h-full bg-transparent border-0 font-bold"
+              }
+            >
+              {x.name}
+            </button>
+          ))}
         </div>
-        {/* <LPFarm /> */}
       </div>
-      {/* 
-      <div className="xl:w-full xl:mx-0 h-12 hidden sm:block bg-white dark:bg-gray-800  shadow rounded">
-        <div className="flex border-b px-5">
-          <button
-            onClick={handleSelectTab}
-            className="focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-400 text-sm border-indigo-700 pt-3 rounded-t text-indigo-700 dark:text-indigo-400 mr-12 cursor-pointer"
-          >
-            <div className="flex items-center mb-3">
-              <img
-                className="icon icon-tabler icon-tabler-home"
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/tabs-with-icons-svg2.svg"
-                alt="eye"
-              />
-              <span className="ml-1 font-normal">LP50</span>
-            </div>
-            <div className="w-full h-1 bg-indigo-700 rounded-t-md"></div>
-          </button>
-          <button
-            onClick={handleSelectTab}
-            className="focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-400  text-sm border-indigo-700 pt-3 rounded-t text-gray-600 mr-12 hover:text-indigo-700 dark:hover:text-indigo-400  dark:text-indigo-400 cursor-pointer"
-          >
-            <div className="flex items-center mb-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-eye"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <circle cx="12" cy="12" r="2" />
-                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
-                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
-              </svg>
-              <span className="ml-1 font-normal">LP30</span>
-            </div>
-            <div className="w-full h-1 bg-indigo-700 rounded-t-md hidden"></div>
-          </button>
-          <button
-            onClick={handleSelectTab}
-            className="focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-400  text-sm border-indigo-700 pt-3 rounded-t text-gray-600 mr-12 hover:text-indigo-700 dark:hover:text-indigo-400  dark:text-indigo-400 cursor-pointer"
-          >
-            <div className="flex items-center mb-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-eye"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <circle cx="12" cy="12" r="2" />
-                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
-                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
-              </svg>
-              <span className="ml-1 font-normal">LP20</span>
-            </div>
-            <div className="w-full h-1 bg-indigo-700 rounded-t-md hidden"></div>
-          </button>
+      {farmAddress === "" ? (
+        <></>
+      ) : (
+        <LPFarm
+          LPFarm={state.LPFarms!.filter((x) => x.address === farmAddress)[0]!}
+          handleCheckPoint={handleCheckpoint}
+          handleClaimReward={handleClaimReward}
+          handleWithdraw={handleWithdraw}
+          isParticipant={
+            state.LPFarms!.filter((x) => x.address === farmAddress)[0]!
+              .isParticipant
+          }
+        />
+      )}
+      <div className="grid grid-cols-2">
+        <div className="grid grid-rows-2 flex justify-items-end mt-2">
+          <p>{"total claimed reward: "}</p>
+          <p>{" current block number: "}</p>
         </div>
-      </div> */}
+        <div className="grid grid-rows-2 flex justify-center mt-2">
+          <p>{state.totalClaimedReward}</p>
+          <p>{state.currentBlockNumber}</p>
+        </div>
+      </div>
     </div>
   );
 };
