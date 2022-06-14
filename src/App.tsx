@@ -1,20 +1,15 @@
-import React, { useEffect } from "react";
-import logo from "./logo.svg";
+import { useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import MainLayout from "./components/MainLayout";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { getContract, getWeb3 } from "./redux/slice/blockchainSlice";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import {
   getContractModel,
-  LPFarmName20,
-  LPFarmName30,
-  LPFarmName50,
+  LPFactoryName,
   RewardTokenName,
 } from "./model/blockchain/blockchainModel";
-import About from "./components/About";
 import Footer from "./components/Footer";
 
 function App() {
@@ -34,9 +29,7 @@ function App() {
   useEffect(() => {
     if (state.web3 !== undefined) {
       handleGetContract(RewardTokenName);
-      handleGetContract(LPFarmName50);
-      handleGetContract(LPFarmName30);
-      handleGetContract(LPFarmName20);
+      handleGetContract(LPFactoryName);
     }
   }, [state.web3]);
 
@@ -49,12 +42,11 @@ function App() {
     );
   };
   return (
-    <>
+    <div className="bg-zinc-200">
       <Navbar />
       <MainLayout />
-      <About />
       <Footer />
-    </>
+    </div>
   );
 }
 

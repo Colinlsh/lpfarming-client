@@ -5,13 +5,12 @@ interface LPFarmProps {
   handleCheckPoint: () => void;
   handleClaimReward: () => void;
   handleWithdraw: () => void;
-  LPFarm: LPFarmModel;
+  LPFarm: LPFarmModel | undefined;
   isParticipant: boolean;
 }
 
 const LPFarm: React.FC<LPFarmProps> = ({
   LPFarm,
-  handleCheckPoint,
   handleClaimReward,
   handleWithdraw,
   isParticipant,
@@ -27,16 +26,28 @@ const LPFarm: React.FC<LPFarmProps> = ({
           <p>Start block number: </p>
         </div>
         <div className="grid auto-rows-auto flex justify-center">
-          <p>{LPFarm.rewardProportion}</p>
-          <p>{LPFarm.deposits}</p>
-          <p>{LPFarm.claimedRewards}</p>
-          <p>{LPFarm.expectedYield}</p>
-          <p>{LPFarm.startBlockNumber}</p>
+          {LPFarm === undefined ? (
+            <>
+              <p>0</p>
+              <p>0</p>
+              <p>0</p>
+              <p>0</p>
+              <p>0</p>
+            </>
+          ) : (
+            <>
+              <p>{LPFarm!.rewardProportion}</p>
+              <p>{LPFarm!.deposits}</p>
+              <p>{LPFarm!.claimedRewards}</p>
+              <p>{LPFarm!.expectedYield}</p>
+              <p>{LPFarm!.startBlockNumber}</p>
+            </>
+          )}
         </div>
       </div>
       <div className="flex place-content-around mt-2">
         <button
-          disabled={!isParticipant || LPFarm.expectedYield === 0}
+          disabled={!isParticipant || LPFarm!.expectedYield === 0}
           onClick={() => handleClaimReward()}
           className="p-2"
         >

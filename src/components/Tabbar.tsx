@@ -1,9 +1,4 @@
 import { useEffect, useState } from "react";
-import {
-  LPFarmName20,
-  LPFarmName30,
-  LPFarmName50,
-} from "../model/blockchain/blockchainModel";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   checkpoint,
@@ -20,13 +15,7 @@ const Tabbar = () => {
   const state = useAppSelector((state: RootState) => state.blockchain);
   const dispatch = useAppDispatch();
   // #endregion
-  const [tabState, setTabState] = useState(0);
   const [farmAddress, setFarmAddress] = useState("");
-
-  // const handleSelectOption = (num: string) => {
-  //   setTabState(parseInt(num));
-  //   setSelectedPoolDispatch(parseInt(num));
-  // };
 
   const handleSelectOptionAddress = (address: string) => {
     setFarmAddress(address);
@@ -84,6 +73,16 @@ const Tabbar = () => {
   };
 
   useEffect(() => {
+    if (
+      state.LPFarms !== undefined &&
+      state.LPFarms.length > 0 &&
+      farmAddress === ""
+    ) {
+      setFarmAddress(state.LPFarms![0].address);
+    }
+  }, [state.LPFarms]);
+
+  useEffect(() => {
     dispatch(
       getFarmStats({
         contracts: [
@@ -105,8 +104,8 @@ const Tabbar = () => {
   ]);
 
   return (
-    <div>
-      <div className="sm:hidden relative w-11/12 mx-auto bg-white dark:bg-gray-800 rounded">
+    <div className="rounded border border-black drop-shadow-xl">
+      <div className="sm:hidden relative mx-auto bg-white dark:bg-gray-800">
         <div className="absolute inset-0 m-auto mr-4 z-0 w-6 h-6">
           <img
             className="icon icon-tabler icon-tabler-selector"
@@ -135,7 +134,7 @@ const Tabbar = () => {
           ))}
         </select>
       </div>
-      <div className="xl:w-full xl:mx-0 h-12 hidden sm:block bg-white dark:bg-gray-800 shadow rounded">
+      <div className="xl:w-full xl:mx-0 h-12 hidden sm:block bg-white dark:bg-gray-800 shadow">
         <div className="flex h-full place-content-around px-10">
           {state.LPFarms!.map((x, index) => (
             <button
@@ -152,20 +151,19 @@ const Tabbar = () => {
           ))}
         </div>
       </div>
-      {farmAddress === "" ? (
-        <></>
-      ) : (
-        <LPFarm
-          LPFarm={state.LPFarms!.filter((x) => x.address === farmAddress)[0]!}
-          handleCheckPoint={handleCheckpoint}
-          handleClaimReward={handleClaimReward}
-          handleWithdraw={handleWithdraw}
-          isParticipant={
-            state.LPFarms!.filter((x) => x.address === farmAddress)[0]!
-              .isParticipant
-          }
-        />
-      )}
+      <LPFarm
+        LPFarm={state.LPFarms!.filter((x) => x.address === farmAddress)[0]!}
+        handleCheckPoint={handleCheckpoint}
+        handleClaimReward={handleClaimReward}
+        handleWithdraw={handleWithdraw}
+        isParticipant={
+          state.LPFarms!.filter((x) => x.address === farmAddress)[0] ===
+          undefined
+            ? false
+            : state.LPFarms!.filter((x) => x.address === farmAddress)[0]!
+                .isParticipant
+        }
+      />
       <div className="grid grid-cols-2">
         <div className="grid grid-rows-2 flex justify-items-end mt-2">
           <p>{"total claimed reward: "}</p>

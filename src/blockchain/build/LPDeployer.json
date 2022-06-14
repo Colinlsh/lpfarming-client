@@ -598,16 +598,16 @@
         666
       ],
       "IERC20LP": [
-        1195
+        1268
       ],
       "IlpDeployer": [
-        1209
+        1282
       ],
       "LPDeployer": [
         779
       ],
       "LPFarm": [
-        1182
+        1255
       ]
     },
     "id": 780,
@@ -632,7 +632,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 780,
-        "sourceUnit": 1210,
+        "sourceUnit": 1283,
         "src": "61:38:5",
         "symbolAliases": [],
         "unitAlias": ""
@@ -644,7 +644,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 780,
-        "sourceUnit": 1183,
+        "sourceUnit": 1256,
         "src": "101:22:5",
         "symbolAliases": [],
         "unitAlias": ""
@@ -657,7 +657,7 @@
               "id": 718,
               "name": "IlpDeployer",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 1209,
+              "referencedDeclaration": 1282,
               "src": "150:11:5"
             },
             "id": 719,
@@ -672,7 +672,7 @@
         "id": 779,
         "linearizedBaseContracts": [
           779,
-          1209
+          1282
         ],
         "name": "LPDeployer",
         "nameLocation": "136:10:5",
@@ -803,7 +803,7 @@
           },
           {
             "baseFunctions": [
-              1208
+              1281
             ],
             "constant": false,
             "functionSelector": "c9f83503",
@@ -1020,7 +1020,7 @@
                               "nodeType": "NewExpression",
                               "src": "763:10:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1182_$",
+                                "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1255_$",
                                 "typeString": "function () returns (contract LPFarm)"
                               },
                               "typeName": {
@@ -1030,13 +1030,13 @@
                                   "id": 757,
                                   "name": "LPFarm",
                                   "nodeType": "IdentifierPath",
-                                  "referencedDeclaration": 1182,
+                                  "referencedDeclaration": 1255,
                                   "src": "767:6:5"
                                 },
-                                "referencedDeclaration": 1182,
+                                "referencedDeclaration": 1255,
                                 "src": "767:6:5",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_LPFarm_$1182",
+                                  "typeIdentifier": "t_contract$_LPFarm_$1255",
                                   "typeString": "contract LPFarm"
                                 }
                               }
@@ -1200,7 +1200,7 @@
                             ],
                             "src": "763:152:5",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1182_$salt",
+                              "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_LPFarm_$1255_$salt",
                               "typeString": "function () returns (contract LPFarm)"
                             }
                           },
@@ -1215,7 +1215,7 @@
                           "src": "763:154:5",
                           "tryCall": false,
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_LPFarm_$1182",
+                            "typeIdentifier": "t_contract$_LPFarm_$1255",
                             "typeString": "contract LPFarm"
                           }
                         }
@@ -1223,7 +1223,7 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_LPFarm_$1182",
+                            "typeIdentifier": "t_contract$_LPFarm_$1255",
                             "typeString": "contract LPFarm"
                           }
                         ],
@@ -1484,15 +1484,21 @@
     "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x4BEB6c0FE8420596912c1e1D095B2bDEf60EeD43",
+      "transactionHash": "0xcec3e487e14ae5009c832b2b0c7083abdce3fb41cc8d236f4a21afe36eca9c15"
+    },
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xB5E863528AE6Fd4306c2D0BBEf0E27A9c75660c9",
-      "transactionHash": "0xb1e977549de65a683b910cd3db5e192bb21c874c7ecd250fb19912ace8958ef5"
+      "address": "0xE0620e6C504B7FD0E4E5Cb4fe598E9555ec75FEA",
+      "transactionHash": "0xe0286bca6173f07f92ac14a688114af391cd12f48fc0f11a65fc392e482bf9b9"
     }
   },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-06-13T09:32:53.338Z",
+  "updatedAt": "2022-06-14T11:43:13.350Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

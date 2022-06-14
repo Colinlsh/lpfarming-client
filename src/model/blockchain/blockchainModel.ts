@@ -5,6 +5,7 @@ export interface web3State {
   currentAccount: string;
   web3: Web3 | undefined;
   RewardToken: web3Contract | undefined;
+  LPFactory: web3Contract | undefined;
   LPFarms: LPFarmModel[] | undefined;
   totalClaimedReward: string;
   selectedPool: string;
@@ -43,13 +44,21 @@ export interface LPFarmModel extends web3Contract {
   claimedRewards: number;
   expectedYield: number;
   rewardProportion: number;
-  deposits: number;
+  deposits: string;
   isParticipant: boolean;
   startBlockNumber: string;
 }
 
+export interface CreateLPFarmModel extends transactionModel {
+  tokenAddress: string;
+  rewardProportion: number;
+}
+
+export interface FarmDetails {
+  address: string;
+  contract: Contract;
+  rewardProportion: number;
+}
+
 export const RewardTokenName = "RewardToken";
-export const LPFarmName50 = "LPFarm50";
-export const LPFarmName30 = "LPFarm30";
-export const LPFarmName20 = "LPFarm20";
 export const LPFactoryName = "LPFactory";
