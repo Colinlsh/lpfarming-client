@@ -78,7 +78,7 @@ const Tabbar = () => {
       state.LPFarms.length > 0 &&
       farmAddress === ""
     ) {
-      setFarmAddress(state.LPFarms![0].address);
+      handleSelectOptionAddress(state.LPFarms![0].address);
     }
   }, [state.LPFarms]);
 
