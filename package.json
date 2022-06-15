@@ -1,6 +1,6 @@
 {
   "name": "lpfarming-client",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "homepage": "https://colinlsh.github.io/lpfarming-client",
   "private": true,
   "dependencies": {

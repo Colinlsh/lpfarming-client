@@ -11,6 +11,7 @@ import {
   setIsLoading,
 } from "../redux/slice/blockchainSlice";
 import AddNewLP from "./AddNewLP";
+import Spinner from "./UI/Spinner";
 
 const MainLayout = () => {
   // #region redux
@@ -85,7 +86,6 @@ const MainLayout = () => {
               There will be a default 0.1 ETH needed to participate and it will
               be refunded once you withdraw from the pool
             </p>
-
             <button
               onClick={() =>
                 handleParticipate(
@@ -96,7 +96,7 @@ const MainLayout = () => {
                   "0.1"
                 )
               }
-              className="py-3 px-6 w-[100%] z-1 my-4 shadow-xl hover:text-linkedinShade font-bold"
+              className="py-3 px-6 w-[100%] z-1 my-4 shadow-xl hover:text-linkedinShade font-bold flex justify-center"
               disabled={
                 state.LPFarms!.filter(
                   (x) => x.name === state.selectedPool
@@ -104,10 +104,22 @@ const MainLayout = () => {
                   ? false
                   : state.LPFarms!.filter(
                       (x) => x.name === state.selectedPool
-                    )[0].isParticipant
+                    )[0].isParticipant ||
+                    state.LPFarms!.filter(
+                      (x) => x.name === state.selectedPool
+                    )[0].isLoading
               }
             >
-              Participate
+              {state.LPFarms!.filter(
+                (x) => x.name === state.selectedPool
+              )[0] === undefined ? (
+                "Participate"
+              ) : state.LPFarms!.filter((x) => x.name === state.selectedPool)[0]
+                  .isLoading ? (
+                <Spinner />
+              ) : (
+                "Participate"
+              )}
             </button>
           </div>
           <div className="px-2">

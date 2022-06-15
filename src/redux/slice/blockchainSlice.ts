@@ -169,11 +169,13 @@ export const participate = createAsyncThunk(
       } as KeyValuePair;
     } catch (error) {
       console.log(error);
+      if ((error as any).code === 4001) {
+      }
     }
 
     return {
-      name: transactionModel.contractName,
-      value: [0, 0],
+      name: transactionModel.contracts[0].address,
+      value: [-1, -1],
     } as KeyValuePair;
   }
 );
@@ -181,20 +183,28 @@ export const participate = createAsyncThunk(
 export const withdraw = createAsyncThunk(
   "blockchain/withdraw",
   async (transactionModel: transactionModel) => {
-    let contract = transactionModel!.contracts[0].contract!;
-    let rewardTokenContract = transactionModel!.contracts[1].contract!;
+    try {
+      let contract = transactionModel!.contracts[0].contract!;
+      let rewardTokenContract = transactionModel!.contracts[1].contract!;
 
-    await contract.methods.withdraw().send({
-      from: transactionModel.from,
-    });
+      await contract.methods.withdraw().send({
+        from: transactionModel.from,
+      });
 
-    let claimedReward = await rewardTokenContract.methods
-      .balanceOf(transactionModel.from)
-      .call();
+      let claimedReward = await rewardTokenContract.methods
+        .balanceOf(transactionModel.from)
+        .call();
 
+      return {
+        name: transactionModel!.contracts[0].address,
+        value: [claimedReward, transactionModel!.contracts[0]],
+      } as KeyValuePair;
+    } catch (error) {
+      console.log(error);
+    }
     return {
       name: transactionModel!.contracts[0].address,
-      value: [claimedReward],
+      value: [-1, transactionModel!.contracts[0]],
     } as KeyValuePair;
   }
 );
@@ -215,15 +225,15 @@ export const claimRewards = createAsyncThunk(
         .call();
 
       return {
-        name: transactionModel.contracts[0].address,
-        value: [claimedReward],
+        name: transactionModel.contracts[0]!.name,
+        value: [claimedReward, transactionModel.contracts[0]!.address],
       } as KeyValuePair;
     } catch (error) {
       console.log(error);
     }
     return {
       name: "",
-      value: [],
+      value: [-1, transactionModel.contracts[0]!.address],
     } as KeyValuePair;
   }
 );
@@ -306,31 +316,40 @@ export const checkpoint = createAsyncThunk(
 export const createLPFarm = createAsyncThunk(
   "blockchain/createLPFarm",
   async (createLPFarmModel: CreateLPFarmModel) => {
-    const lpFactory = createLPFarmModel.contracts[0].contract!;
-    const web3 = createLPFarmModel.web3!;
+    try {
+      const lpFactory = createLPFarmModel.contracts[0].contract!;
+      const web3 = createLPFarmModel.web3!;
 
-    const newLPaddress = await lpFactory.methods
-      .createLPFarm(
-        createLPFarmModel.tokenAddress,
-        createLPFarmModel.rewardProportion
-      )
-      .send({ from: createLPFarmModel.from });
+      const newLPaddress = await lpFactory.methods
+        .createLPFarm(
+          createLPFarmModel.tokenAddress,
+          createLPFarmModel.rewardProportion
+        )
+        .send({ from: createLPFarmModel.from });
 
-    // const address = newLPaddress.events.address;
-    console.log(newLPaddress);
+      // const address = newLPaddress.events.address;
+      console.log(newLPaddress);
 
-    let _lpAddress = await lpFactory.methods
-      .getLPFarmsAddress(
-        createLPFarmModel.tokenAddress,
-        createLPFarmModel.rewardProportion
-      )
-      .call();
+      let _lpAddress = await lpFactory.methods
+        .getLPFarmsAddress(
+          createLPFarmModel.tokenAddress,
+          createLPFarmModel.rewardProportion
+        )
+        .call();
 
-    const _contract = new web3.eth.Contract(LPFarm.abi as any, _lpAddress);
+      const _contract = new web3.eth.Contract(LPFarm.abi as any, _lpAddress);
+
+      return {
+        name: newLPaddress,
+        value: [_contract, _lpAddress, createLPFarmModel.rewardProportion],
+      } as KeyValuePair;
+    } catch (error) {
+      console.log(error);
+    }
 
     return {
-      name: newLPaddress,
-      value: [_contract, _lpAddress, createLPFarmModel.rewardProportion],
+      name: "",
+      value: [-1],
     } as KeyValuePair;
   }
 );
@@ -406,6 +425,8 @@ const blockchainSlice: Slice<
               deposits: "0",
               isParticipant: false,
               startBlockNumber: "0",
+              isWithdrawing: false,
+              isClaimingRewards: false,
             });
           }
         } else if (name === RewardTokenName) {
@@ -437,10 +458,13 @@ const blockchainSlice: Slice<
         let { name, value } = action.payload;
 
         const _lpfarm = state.LPFarms!.filter((x) => x.address === name)[0];
-        _lpfarm.deposits = Web3.utils.fromWei(value[0], "ether");
 
-        state.currentBlockNumber = value[1];
-        state.totalClaimedReward = Web3.utils.fromWei(value[2], "ether");
+        if (value[0] !== -1 && value[1] !== -1) {
+          _lpfarm.deposits = Web3.utils.fromWei(value[0], "ether");
+
+          state.currentBlockNumber = value[1];
+          state.totalClaimedReward = Web3.utils.fromWei(value[2], "ether");
+        }
 
         _lpfarm.isLoading = false;
       }
@@ -470,28 +494,77 @@ const blockchainSlice: Slice<
       }
     });
 
+    builder.addCase(withdraw.pending, (state, { meta }) => {
+      const transactionModel = meta.arg as transactionModel;
+
+      const _lpfarm = state.LPFarms?.filter(
+        (x) => x.address === transactionModel.contracts[0]!.address
+      )[0];
+
+      _lpfarm!.isWithdrawing = true;
+    });
+
     builder.addCase(
       withdraw.fulfilled,
       (state, action: PayloadAction<KeyValuePair>) => {
         let { name, value } = action.payload;
-        const _farm = state.LPFarms!.filter((x) => x.address === name)[0];
+        const _farm = value[1] as LPFarmModel;
 
-        _farm.claimedRewards = 0;
-        _farm.expectedYield = 0;
-        _farm.deposits = "0";
+        const _lpfarm = state.LPFarms!.filter(
+          (x) => x.address === _farm!.address
+        )[0];
 
-        state.totalClaimedReward = Web3.utils.fromWei(value[0], "ether");
+        if (value[0] !== -1) {
+          _lpfarm.claimedRewards = 0;
+          _lpfarm.expectedYield = 0;
+          _lpfarm.deposits = "0";
+
+          state.totalClaimedReward = Web3.utils.fromWei(value[0], "ether");
+        }
+
+        _lpfarm.isWithdrawing = false;
       }
     );
+
+    builder.addCase(withdraw.rejected, (state, { meta }) => {
+      const transactionModel = meta.arg as transactionModel;
+
+      const _lpfarm = state.LPFarms?.filter(
+        (x) => x.address === transactionModel.contracts[0]!.address
+      )[0];
+
+      _lpfarm!.isWithdrawing = false;
+    });
+
+    builder.addCase(claimRewards.pending, (state, { meta }) => {
+      const transactionModel = meta.arg as transactionModel;
+      const _lpfarm = state.LPFarms!.filter(
+        (x) => x.address === transactionModel.contracts[0]!.address
+      )[0];
+      _lpfarm.isClaimingRewards = true;
+    });
 
     builder.addCase(
       claimRewards.fulfilled,
       (state, action: PayloadAction<KeyValuePair>) => {
         let { name, value } = action.payload;
 
-        state.totalClaimedReward = Web3.utils.fromWei(value[0], "ether");
+        const _lpfarm = state.LPFarms!.filter((x) => x.address === value[1])[0];
+
+        if (value[0] !== -1) {
+          state.totalClaimedReward = Web3.utils.fromWei(value[0], "ether");
+        }
+        _lpfarm.isClaimingRewards = false;
       }
     );
+
+    builder.addCase(claimRewards.rejected, (state, { meta }) => {
+      const transactionModel = meta.arg as transactionModel;
+      const _lpfarm = state.LPFarms!.filter(
+        (x) => x.address === transactionModel.contracts[0]!.address
+      )[0];
+      _lpfarm.isClaimingRewards = false;
+    });
 
     builder.addCase(
       checkpoint.fulfilled,
@@ -522,30 +595,44 @@ const blockchainSlice: Slice<
       }
     );
 
+    builder.addCase(createLPFarm.pending, (state, { meta }) => {
+      state.LPFactory!.isCreatingFarm = true;
+    });
+
     builder.addCase(
       createLPFarm.fulfilled,
       (state, action: PayloadAction<KeyValuePair>) => {
         let { name, value } = action.payload;
-        const _lpfarm = state.LPFarms?.filter((x) => x.address === name)[1]!;
 
-        if (_lpfarm === undefined) {
-          state.LPFarms?.push({
-            name: "LPFarm" + value[2],
-            contract: value[0],
-            address: value[1],
-            totalSupply: 0,
-            currentCount: 0,
-            isLoading: false,
-            claimedRewards: 0,
-            expectedYield: 0,
-            rewardProportion: 0,
-            deposits: "0",
-            isParticipant: false,
-            startBlockNumber: "0",
-          });
+        if (value[0] !== -1) {
+          const _lpfarm = state.LPFarms?.filter((x) => x.address === name)[1]!;
+
+          if (_lpfarm === undefined) {
+            state.LPFarms?.push({
+              name: "LPFarm" + value[2],
+              contract: value[0],
+              address: value[1],
+              totalSupply: 0,
+              currentCount: 0,
+              isLoading: false,
+              claimedRewards: 0,
+              expectedYield: 0,
+              rewardProportion: 0,
+              deposits: "0",
+              isParticipant: false,
+              startBlockNumber: "0",
+              isWithdrawing: false,
+              isClaimingRewards: false,
+            });
+          }
         }
+        state.LPFactory!.isCreatingFarm = false;
       }
     );
+
+    builder.addCase(createLPFarm.rejected, (state, { meta }) => {
+      state.LPFactory!.isCreatingFarm = false;
+    });
 
     builder.addCase(
       getLPFarms.fulfilled,
@@ -575,6 +662,8 @@ const blockchainSlice: Slice<
               deposits: "0",
               isParticipant: false,
               startBlockNumber: "0",
+              isWithdrawing: false,
+              isClaimingRewards: false,
             });
           }
         }

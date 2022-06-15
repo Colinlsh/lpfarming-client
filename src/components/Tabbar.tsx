@@ -40,38 +40,6 @@ const Tabbar = () => {
     );
   };
 
-  const handleClaimReward = () => {
-    dispatch(
-      claimRewards({
-        contracts: [
-          state.LPFarms!.filter((x) => x.address === farmAddress)[0],
-          state.RewardToken!,
-        ],
-        contractName: state.selectedPool,
-        from: state.currentAccount,
-        to: "",
-        value: 0,
-        web3: state.web3,
-      })
-    );
-  };
-
-  const handleWithdraw = () => {
-    dispatch(
-      withdraw({
-        contracts: [
-          state.LPFarms!.filter((x) => x.address === farmAddress)[0],
-          state.RewardToken!,
-        ],
-        contractName: state.selectedPool,
-        from: state.currentAccount,
-        to: "",
-        value: 0,
-        web3: state.web3,
-      })
-    );
-  };
-
   useEffect(() => {
     if (
       state.LPFarms !== undefined &&
@@ -153,9 +121,6 @@ const Tabbar = () => {
       </div>
       <LPFarm
         LPFarm={state.LPFarms!.filter((x) => x.address === farmAddress)[0]!}
-        handleCheckPoint={handleCheckpoint}
-        handleClaimReward={handleClaimReward}
-        handleWithdraw={handleWithdraw}
         isParticipant={
           state.LPFarms!.filter((x) => x.address === farmAddress)[0] ===
           undefined
