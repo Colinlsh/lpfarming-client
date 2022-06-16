@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/lpfarming-client/static/css/main.dbefd3a3.css",
-    "main.js": "/lpfarming-client/static/js/main.efccc028.js",
+    "main.css": "/lpfarming-client/static/css/main.2d4d66b0.css",
+    "main.js": "/lpfarming-client/static/js/main.a6da94b0.js",
     "static/js/787.200f1831.chunk.js": "/lpfarming-client/static/js/787.200f1831.chunk.js",
     "static/media/colintech-nobackground.png": "/lpfarming-client/static/media/colintech-nobackground.ffc459718b3036df6db2.png",
     "index.html": "/lpfarming-client/index.html",
-    "main.dbefd3a3.css.map": "/lpfarming-client/static/css/main.dbefd3a3.css.map",
-    "main.efccc028.js.map": "/lpfarming-client/static/js/main.efccc028.js.map",
+    "main.2d4d66b0.css.map": "/lpfarming-client/static/css/main.2d4d66b0.css.map",
+    "main.a6da94b0.js.map": "/lpfarming-client/static/js/main.a6da94b0.js.map",
     "787.200f1831.chunk.js.map": "/lpfarming-client/static/js/787.200f1831.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dbefd3a3.css",
-    "static/js/main.efccc028.js"
+    "static/css/main.2d4d66b0.css",
+    "static/js/main.a6da94b0.js"
   ]
 }
