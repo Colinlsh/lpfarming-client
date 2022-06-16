@@ -11,6 +11,6 @@ Farm, 50 token/blk: https://ropsten.etherscan.io/address/0xb00C2d0fCc3B085ae064B
 Deployer: https://ropsten.etherscan.io/address/0x50d2343ba52aebEA363831e6FF41F2C2ec3A410b
 Reward Token: https://ropsten.etherscan.io/address/0x076Af41f42dba2Fa2D276D6e00d003de580C250c
 
-Site to interact with contract: https://colinlsh.github.io/lpfarming-client/
+Site to interact with contract: https://colinlsh.github.io/lpfarming-client
 Site code: https://github.com/Colinlsh/lpfarming-client
 Contract code: https://github.com/Colinlsh/lpfarming
