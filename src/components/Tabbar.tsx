@@ -27,19 +27,6 @@ const Tabbar = () => {
     dispatch(setSelectedPool(_farm?.name));
   };
 
-  const handleCheckpoint = () => {
-    dispatch(
-      checkpoint({
-        contracts: [state.LPFarms!.filter((x) => x.address === farmAddress)[0]],
-        contractName: state.selectedPool,
-        from: state.currentAccount,
-        to: "",
-        value: 0,
-        web3: state.web3,
-      })
-    );
-  };
-
   useEffect(() => {
     if (
       state.LPFarms !== undefined &&
@@ -51,25 +38,25 @@ const Tabbar = () => {
   }, [state.LPFarms]);
 
   useEffect(() => {
-    dispatch(
-      getFarmStats({
-        contracts: [
-          state.LPFarms!.filter((x) => x.address === farmAddress)[0]!,
-        ],
-        contractName: state.selectedPool,
-        from: state.currentAccount,
-        to: "",
-        value: 0,
-        web3: state.web3,
-      })
-    );
-  }, [
-    state.totalClaimedReward,
-    farmAddress,
-    state.selectedPool,
-    state.currentAccount,
-    state.LPFarms,
-  ]);
+    let interval: NodeJS.Timer;
+    if (state.LPFarms!.length > 0) {
+      interval = setInterval(() => {
+        dispatch(
+          getFarmStats({
+            contracts: [
+              state.LPFarms!.filter((x) => x.address === farmAddress)[0]!,
+            ],
+            contractName: state.selectedPool,
+            from: state.currentAccount,
+            to: "",
+            value: 0,
+            web3: state.web3,
+          })
+        );
+      }, 500);
+    }
+    return () => clearInterval(interval);
+  }, [farmAddress]);
 
   return (
     <div className="rounded border border-black drop-shadow-xl">

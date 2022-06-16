@@ -10,6 +10,7 @@ export interface web3State {
   totalClaimedReward: string;
   selectedPool: string;
   currentBlockNumber: number;
+  error: ErrorModel;
 }
 
 export interface web3Contract {
@@ -64,6 +65,12 @@ export interface FarmDetails {
   address: string;
   contract: Contract;
   rewardProportion: number;
+}
+
+export interface ErrorModel {
+  message: string;
+  header: string;
+  isShow: boolean;
 }
 
 export const RewardTokenName = "RewardToken";

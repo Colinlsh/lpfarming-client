@@ -11,6 +11,7 @@ import {
   RewardTokenName,
 } from "./model/blockchain/blockchainModel";
 import Footer from "./components/Footer";
+import Modal from "./components/Modal";
 
 function App() {
   // #region Redux
@@ -46,6 +47,11 @@ function App() {
       <Navbar />
       <MainLayout />
       <Footer />
+      {state.error.isShow ? (
+        <Modal header={state.error.header} message={state.error.message} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
